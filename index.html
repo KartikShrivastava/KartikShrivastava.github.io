@@ -47,8 +47,7 @@
             <br>
             <br>
             <hr class="dashed">
-            <br>
-            <p><span class="color_text">Guided by:</span><br><a href="https://github.com/bjorn">bjorn</a> and <a href="https://github.com/fundies">fundies</a><br><br><span class="color_text">Project work highlights:</span><br>1. Added initial support to import .tsx files<br>2. Updated .tsx importer to use protocol buffer reflections (the better way)<br>3. Added support to load .tsx file in RadialGM IDE (Minor contri)<br><br><span class="color_text">Other contributions:</span><br>1. Add save EGM project functionality to RadialGM IDE</p>
+            <p style="font-weight: bold;"><span class="color_text">Guided by:</span><br><a href="https://github.com/bjorn">bjorn</a> and <a href="https://github.com/fundies">fundies</a><br><br><span class="color_text">Project work highlights:</span><br>1. Added initial support to import .tsx files<br>2. Updated .tsx importer to use protocol buffer reflections (the better way)<br>3. Added support to load .tsx file in RadialGM IDE (Minor contri)<br><br><span class="color_text">Other contributions:</span><br>1. Add save EGM project functionality to RadialGM IDE</p>
         </div>
         <div class="col span_3_of_12">
         </div>
@@ -58,10 +57,15 @@
         <div class="col span_6_of_12">
             <br>
             <br>
-            <br>
             <hr class="dashed">
             <h2>Details</h2>
-            <h3 style="margin: 0; padding: 0;">How does initial importer will look like🤔?</h3>
+            <h3 style="margin: 0; padding: 0;">How does initial importer looks like🤔?</h3>
+            <p>Tiled <span class="highlight_text">.tsx</span> files uses <span class="highlight_text">xml</span> format to organize its data. So we use <span class="highlight_text"><a href="https://pugixml.org/">pugi</a></span> xml parsing library for this task. To traverse through all tsx xml nodes we use a handy method <span class="highlight_text">pugi::xml_document::traverse(...)</span>, which recursively calls following <span class="highlight_text">for_each</span> method with each node passed as an argument.</p>
+            <script src="https://gist.github.com/KartikShrivastava/e76bdb3bf6a7ff564f9003dbb05c2d3d.js"></script>
+            <p>Now its clear that there is a lot of hardcoded node & attribute names in the above method. Which can be harder to maintain and needs to be updated whenever Tiled revises its .tsx format.<br>So can we do better?</p>
+            <br>
+            <br>
+            <h3 style="margin: 0; padding: 0;">💡Protocol buffers has a better way, reflections!</h3>
         </div>
         <div class="col span_3_of_12"></div>
     </div>

@@ -89,7 +89,7 @@ hr.dashed {
 
 p {
     color: rgb(25, 25, 25);
-    font-weight: bold;
+    font-weight: lighter;
     font-family: roboto_slabregular, 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     line-height: 160%;
 }
@@ -146,6 +146,11 @@ h5 {
 .color_text {
     color: rgb(99, 168, 123);
 }
+
+.highlight_text {
+    background-color: rgba(236, 243, 161, 0.763);
+    border-radius: 5px;
+} 
 
 .bigger_font {
     color: rgb(118, 118, 118);
