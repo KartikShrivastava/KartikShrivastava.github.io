@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <title>GSOC 2022 - Kartik Shrivastava</title>
+    <link rel="stylesheet" href="gridsystem.css">
+    <link rel="stylesheet" href="normalizereset.css">
+    <link rel="stylesheet" href="indexstyle.css">
+</head>
+
+<body>
+    <div style="background-color: rgb(124, 180, 120); padding-top: 10px;"></div>
+    <div>
+        <header>
+            <div style="padding-top: 5%;">Google Summer of Code 2022 - The ENIGMA Team</div>
+        </header>
+
+        <nav>
+            <a href="index.html" style="color: rgb(0, 0, 0);">Home</a>
+            <a href="week1.html" style="color: rgb(0, 0, 0);">Week 1</a>
+            <a href="week2-week3.html" style="color: rgb(0, 0, 0);"><u>Week 2-3</u></a>
+        </nav>
+
+        <hr class="solid">
+
+        <!-- <nav> -->
+            <!-- <a href="#" style="color: rgb(0, 0, 0);"><u>Week 1</u></a> -->
+        <!-- </nav> -->
+
+        <!-- <hr class="solid"> -->
+
+        <main>
+            <div class="section group" style="margin-top: 20px;">
+                <div class="col span_2_of_12">
+                </div>
+                <div class="col span_8_of_12">
+                    <h1 style="color: rgb(6, 6, 6); font-size: 50px;">Week 2 & 3: Importing Tiled .tmx files, the first iteration</h1>
+                </div>
+                <div class="col span_2_of_12">
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="section group">
+        <div class="col span_3_of_12">
+        </div>
+        <div class="col span_6_of_12">
+            <p style="font-size: 20px; line-height: 200%; margin-bottom: 10px;">
+                <span class="color_text">Contributor: </span><a href="https://github.com/KartikShrivastava">Kartik Shrivastava</a>
+                <br>
+                <span class="color_text">Project: </span><a href="https://summerofcode.withgoogle.com/programs/2022/projects/TowRJHuL">Add Tiled compatibility to/from Enigma</a>
+                <br>
+                <span class="color_text">Guided by: </span><a href="https://github.com/bjorn">bjorn</a>, <a href="https://github.com/fundies">fundies</a> and <a href="https://github.com/JoshDreamland">Josh</a>
+                <br>
+            </p>
+            <span class="color_text" style="font-size: 20px; font-family: roboto_slabregular, 'Trebuchet MS';">Highlights: </span>
+            <ol style="font-family: roboto_slabregular, 'Trebuchet MS'; font-size: 20px; line-height: 150%; margin-top: 10px; padding-left: 30px; padding-right: 30px;">
+                <li>Resolved(sort of) the confusion regarding implementation of tsx importer (took a while)</li>
+                <li>Added an implementation based on idea of existing gmx/tsx importer (didn't last tho) <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/0ea925f97837b309a02fa6bb476bbf08004d3acf" style="color: rgb(0, 0, 181);">#0ea925f</a></li>
+                <li>Scrapped the initial implementation for a better one - first working iteration (little fragile atm) <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/477adc1586e7bf66ed3aa902cc8ea96161b37ba6" style="color: rgb(0, 0, 181);">#477adc1</a></li>
+            </ol>
+            <br>
+            <br>
+            <hr class="dashed">
+        </div>
+        <div class="col span_3_of_12" style="margin: 10px;">
+            <h2>A side note</h2>
+            <h3>What you can learn from this as a casual reader?</h3>
+            <ul style="padding-left: 18px; font-size: 18px;">
+                <li>(Personal opinion) How to implement something when you feel you do not know which way to go.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="section group" style="padding-bottom: 50px;">
+        <div class="col span_3_of_12"></div>
+        <div class="col span_6_of_12">
+            <h2>Details</h2>
+            <h3 style="margin: 0; padding: 0;">Removing the confusion😵</h3>
+            <p>
+                2nd week of GSoC started with a lot of confusion regarding the way I should implement the importer. In the first week I had a plan to just write it like tsx importer, but that plan went haywire after I started analysing Room.proto carefully.
+                I wasn't able to make use of initial plan mainly due to presence of repeated fields in Room.proto, as there is no direct connection between Tiled elements and the repeated fields present in Room.proto, so I had to do some more homework (research).
+            </p>
+            <p style="margin-bottom: 0px;">
+                It took me couple of days but the discussion with mentors and the connections uncovered (between Tiled elements and Room fields) during those days helped me get through.
+                Here are few important ones:
+            </p>
+            <ul style="margin-top: 10px; font-size: 15px; font-family: 'Trebuchet MS'; line-height: 150%; color: rgb(25, 25, 25);">
+                <li>Assumed Tiled tileset of all types(based on image or based on individual tile) to be of type Background in Egm.</li>
+                <li>Assumed Tiled map.objectgroup.object to be of type Room.tile in Egm.</li>
+                <li>Tiled map.width and map.height are in "number of tiles" units while Room.width and Room.height are in "number of pixels" units, so this needs to be handled explicitly.</li>
+                <li>Room.tile.background_name should be set explicitly and correctly as referenced Background might be based on single image(single Background) or individual tiles(several Backgrounds) in Egm.</li>
+                <li>Likewise Room.tile.xoffset and Room.tile.yoffset has to be handled explicitly and correctly. In case of Backgrounds with use_as_tileset set to true, [x[y]]offset can be 0 or more. While in case of Backgrounds with use_as_tileset set to false [x[y]]offset are set to 0.</li>
+                <li>Finally "What I did to reach a working stage" is discussed in following sections.</li>
+            </ul>
+            
+            <br>
+            <br>
+            
+            <h3 style="margin: 0; padding: 0;">Now which way to go? Just go and scrap it😝</h3>
+            <p>That's exactly what I did, without worrying way too much about what I'm doing or most importantly "it will work or not", I tried to proceed with the connections I made in last few days. TBH I'm not certain if this is final usable version, but at least it gave some base to improve upon.</p>
+            <p>So I started with the pugixml traverse method, traversing the tmx nodes one-by-one. A little modification to existing tsx importer was made to support both types of tilesets, and also made it accessible to other objects which was private initially.</p>
+            <a href="https://github.com/KartikShrivastava/enigma-dev/blob/0ea925f97837b309a02fa6bb476bbf08004d3acf/CommandLine/libEGM/tsx.cpp">Original version</a>
+            <script src="https://gist.github.com/KartikShrivastava/0705497a264c2e29e0c0a316f6ae7a34.js"></script>
+            <p>Then Room optional fields was linked with similar Map attributes.</p>
+            <a href="https://github.com/KartikShrivastava/enigma-dev/blob/0ea925f97837b309a02fa6bb476bbf08004d3acf/shared/protos/Room.proto">Original version</a>
+            <script src="https://gist.github.com/KartikShrivastava/087f789ead50fa3787028079815803ac.js"></script>
+            <p>
+                After testing that Backgrounds are loading properly and Room is loading properly with optional fields, its time to add tiles to Room.tile repeated field.
+                <br>
+                But at this point problems start to appear in the current implementation, and there are couple of them.
+            </p>
+            <ul style="margin-top: 10px; font-size: 15px; font-family: 'Trebuchet MS'; line-height: 150%; color: rgb(25, 25, 25);">
+                <li>Fields like Room.tile.background_name, Room.tile.xoffset and Room.tile.yoffset can be set correctly only if Backgrounds are already loaded in tmx importer.</li>
+                <li>But current implementation traverses tmx map node by node in which tilset comes down the tree, by the time Room is already processed.</li>
+                <li>Going with approach of two iterations of tmx file is an option but can we do better?</li>
+                <li>Also because of fields which needs to be set explicitly, the current importer looks really complex with lot of if-else chains here and there. See following situations:</li>
+            </ul>
+            <a href="https://github.com/KartikShrivastava/enigma-dev/blob/0ea925f97837b309a02fa6bb476bbf08004d3acf/CommandLine/libEGM/tmx.cpp">Original version</a>
+            <script src="https://gist.github.com/KartikShrivastava/45d0daf96a600026a378d7823c2d0c40.js"></script>
+            <p>So I felt that its time to say good bye to this approach and think of a one which is less complex and takes less number of(or just single) iterations of tmx file.</p>
+            
+            <br>
+            <br>
+            
+            <h3 style="margin: 0; padding: 0;">🤔How about iterating only required xml node tree & in the order we want?</h3>
+            <p>Now the big change is not to use pugi traverse method and not to traverse tmx xml tree node-by-node from top to bottom, but rather iterate it according to our use case. To do that a custom Load method is added which looks like this:</p>
+            <a href="https://github.com/KartikShrivastava/enigma-dev/blob/477adc1586e7bf66ed3aa902cc8ea96161b37ba6/CommandLine/libEGM/tmx.cpp">Original version</a>
+            <script src="https://gist.github.com/KartikShrivastava/600cf91c9e9bc6a63a93701965a7e3c5.js"></script>
+            <p>At first to resolve issue of not having Backgrounds to refer while filling Room.proto, we will initially traverse all the tileset nodes present in tmx file.</p>
+            <p>Now we will traverse map node and start to fill Room.proto. At the end we will handle the fields which needs to be set explicitly, without need of any if-else chain.</p>
+            <p>At the end we will traverse all the map.objectgroups.objects (using LoadObjects method) from the given Room instance one-by-one and fill the Room.tile repeated fields correctly, again we have eliminated lot of if-else complexity.</p>
+        </div>
+        <div class="section group">
+            <div class="col span_3_of_12">
+            </div>
+            <div class="col span_6_of_12">
+                <p style="font-weight: bold;">So, that's how a working first iteration of tmx importer is created. There are lot of missing bits and TODOs which will be addressed in coming weeks. :)</p>
+            </div>
+            <div class="col span_3_of_12">
+            </div>
+        </div>
+        <div class="col span_3_of_12"></div>
+    </div>
+    <div style="background-color: rgb(124, 180, 120); padding-top: 10px; margin-top: 20px;"></div>
+</body>
+</html>

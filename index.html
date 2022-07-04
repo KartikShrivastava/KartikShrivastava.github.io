@@ -11,29 +11,29 @@
     <link rel="stylesheet" href="gridsystem.css">
     <link rel="stylesheet" href="normalizereset.css">
     <link rel="stylesheet" href="indexstyle.css">
-    
 </head>
 
 <body>
+    <div style="background-color: rgb(124, 180, 120); padding-top: 10px;"></div>
     <div>
         <header>
-            <div style="padding-top: 5%;">Google Summer of Code 2022 - ENIGMA</div>
-            <div style="padding-top: 2%; font-size: 20px;">Contributor: <a href="https://github.com/KartikShrivastava">Kartik Shrivastava</a></div>
-            <div style="padding-top: 1%; font-size: 20px;">Project: <a href="https://summerofcode.withgoogle.com/programs/2022/projects/TowRJHuL">Add Tiled compatibility to/from Enigma</a></div>
+            <div style="padding-top: 5%;">Google Summer of Code 2022 - The ENIGMA Team</div>
         </header>
 
-        <!-- <nav> -->
-            <!-- <a href="#" style="color: rgb(0, 0, 0);"><u>Week 1</u></a> -->
-        <!-- </nav> -->
+        <nav>
+            <a href="#" style="color: rgb(0, 0, 0);"><u>Home</u></a>
+            <a href="week1.html" style="color: rgb(0, 0, 0);">Week 1</a>
+            <a href="week2-week3.html" style="color: rgb(0, 0, 0);">Week 2-3</a>
+        </nav>
 
-        <!-- <hr class="solid"> -->
+        <hr class="solid">
 
         <main>
-            <div class="section group" style="margin-top: 20px;">
+            <div class="section group">
                 <div class="col span_2_of_12">
                 </div>
                 <div class="col span_8_of_12">
-                    <h1 style="color: rgb(6, 6, 6); font-size: 50px;">Week 1: Importing Tiled .tsx files, the better way</h1>
+                    <h1 style="color: rgb(6, 6, 6); font-size: 50px;">My GSoC Logs</h1>
                 </div>
                 <div class="col span_2_of_12">
                 </div>
@@ -44,62 +44,24 @@
         <div class="col span_3_of_12">
         </div>
         <div class="col span_6_of_12">
+            
+            <p style="font-size: 20px; line-height: 200%; ">
+                <span class="color_text">Contributor: </span><a href="https://github.com/KartikShrivastava">Kartik Shrivastava</a>
+                <br>
+                <span class="color_text">Project: </span><a href="https://summerofcode.withgoogle.com/programs/2022/projects/TowRJHuL">Add Tiled compatibility to/from Enigma</a>
+                <br>
+                <span class="color_text">Mentored by: </span><a href="https://github.com/bjorn">bjorn</a>, <a href="https://github.com/fundies">fundies</a> and <a href="https://github.com/JoshDreamland">Josh</a>
+            </p>
             <br>
             <br>
-            <hr class="dashed">
-            <p style="font-weight: bold;"><span class="color_text">Guided by:</span><br><a href="https://github.com/bjorn">bjorn</a> and <a href="https://github.com/fundies">fundies</a><br><br><span class="color_text">Project work highlights:</span></p>
-            <ol style="font-weight: bold; font-family: roboto_slabregular, 'Trebuchet MS'; padding-left: 25px; line-height: 150%; color: rgb(63, 63, 63);">
-                <li>Added initial support to import .tsx files <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/a723e88f2bf0a1edf427ae113ad3f45b97ba18f4" style="color: rgb(0, 0, 181);">#a723e88</a></li>
-                <li>Updated .tsx importer to use protocol buffer reflections (the better way) <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/3e1e6994cc94d4e45d0cef2d10e9083e05b250ac" style="color: rgb(0, 0, 181);">#3e1e699</a></li>
-                <li>Added support to load .tsx file in RadialGM IDE (minor contri) <a href="https://github.com/enigma-dev/RadialGM/pull/228/commits/45f4993edf87c4e97c16b74f7240abe1421e7dcf" style="color: rgb(0, 0, 181);">#45f4993</a></li>
-            </ol>
+            <h2>Week 1: <a href="week1.html" style="color: rgb(0, 0, 0);"><u>Importing Tiled .tsx files, the better way</u></a></h2>
+            <br>
+            <h2>Week 2-3: <a href="week1.html" style="color: rgb(0, 0, 0);"><u>Importing Tiled .tmx files, the first iteration</u></a></h2>
+            <br>
         </div>
-        <div class="col span_3_of_12" style="margin: 10px;">
-            <h2>A side note</h2>
-            <h3>What you can learn from this as a casual reader?</h3>
-            <ul style="padding-left: 18px; font-size: 18px;">
-                <li>How to import and parse xml files in C++ using pugixml library.</li>
-                <li>How to use Protocol buffers reflections as an alternative to parse xml data.</li>
-            </ul>
+        <div class="col span_3_of_12">
         </div>
     </div>
-    <div class="section group" style="padding-bottom: 100px;">
-        <div class="col span_3_of_12"></div>
-        <div class="col span_6_of_12">
-            <br>
-            <br>
-            <hr class="dashed">
-            <h2>Details</h2>
-            <h3 style="margin: 0; padding: 0;">How does initial importer looks like🤔?</h3>
-            <p>Tiled <span class="highlight_text">.tsx</span> files uses <span class="highlight_text">xml</span> format to organize its data. So we use <span class="highlight_text"><a href="https://pugixml.org/">pugi</a></span> xml parsing library for this task. To traverse through all tsx xml nodes we use a handy method <span class="highlight_text">pugi::xml_document::traverse(...)</span>, which recursively calls following <span class="highlight_text">for_each</span> method with each node passed as an argument.</p>
-            <a href="https://github.com/KartikShrivastava/enigma-dev/blob/a723e88f2bf0a1edf427ae113ad3f45b97ba18f4/CommandLine/libEGM/tsx.cpp">Original version</a>
-            <script src="https://gist.github.com/KartikShrivastava/e76bdb3bf6a7ff564f9003dbb05c2d3d.js"></script>
-            <p>In each iteration of above method we fill the <span class="highlight_text">proto fields</span> with the correct <span class="highlight_text">xml node attribute value</span> using carefully written <span class="highlight_text">if-else chain</span> (the proto fields we are talking about here are refering to <span class="highlight_text">Background.proto</span>). And why we are filling the proto fields? GYA, because Enigma's libEGM uses protocol buffers to store data internally (find more details in next section).</p>
-            <p>Now its clear that there is a lot of hardcoded node & attribute names in the above method. Which can be harder to maintain and needs to be updated whenever Tiled revises its .tsx format.<br>So can we do better?</p>
-            <br>
-            <br>
-            <h3 style="margin: 0; padding: 0;">💡Protocol buffer has a better way, reflections!</h3>
-            <p><span class="highlight_text"><a href="https://developers.google.com/protocol-buffers">Protocol buffers</a></span> are used to serialize structured data and offer loads of features such as language neutral serializing, automatic class generator, reflection mechanism to process data, etc. Enigma's <span class="highlight_text">libEGM</span> which is built to read-write game projects internally uses protocol buffers to store data. So we are going to use <span class="highlight_text"><a href="https://developers.google.com/protocol-buffers/docs/reference/cpp/google.protobuf.message#Reflection">reflection</a></span> mechanism of protocol buffers to improve our .tsx importer.</p>
-            <p>The method for iterating over xml nodes of .tsx file will remain the same i.e. <span class="highlight_text">pugi::xml_document::traverse(...)</span>. Now the main problem is to establish the mapping between xml nodes and proto fields. And here comes another handy feature of protocol buffers to the rescue. It's called <span class="highlight_text">proto field extensions</span>. Take a look at following snippet.</p>
-            <a href="https://github.com/KartikShrivastava/enigma-dev/blob/kash/tiled-comp-enigma/shared/protos/Background.proto">Original version</a>
-            <script src="https://gist.github.com/KartikShrivastava/b62eaa5b1303a3acb429032142a3c619.js"></script>
-            <p>In the above code, <span class="highlight_text">id</span> field of <span class="highlight_text">Background.proto</span> uses two extensions viz. <span class="highlight_text">(gmx) = "GMX_DEPRECATED"</span> and <span class="highlight_text">(tmx) = "firstgid"</span>, enclosed within pair of sqaure brackets<span class="highlight_text">[]</span>. In second extension, text after tmx within square brackets<span class="highlight_text">""</span> represents <span class="highlight_text">xml node attribute value</span>. We are using tmx for both .tsx and .tmx files.</p>
-            <p></p>
-            <p>Now to establish the mapping we will store xml node attribute names in the appropriate proto field as an extension value. Following code snippet sums up the basic working of reflection, code is edited and unnecessary details are stripped away.</p>
-            <a href="https://github.com/KartikShrivastava/enigma-dev/blob/kash/tiled-comp-enigma/CommandLine/libEGM/tsx.cpp">Original version</a>
-            <script src="https://gist.github.com/KartikShrivastava/9d1cec70fb8ba8b4c2017d4df3f497b1.js"></script>
-            <p>As you can see <span class="highlight_text">for_each</span> method passes the xml node and proto node pointer(right now it is not decided which proto message it belongs to) to <span class="highlight_text">AddResource(...)</span> method. And AddResource(...) performs some processing and finds appropriate proto message which in this case is Background.proto and pases the result to <span class="highlight_text">PackRes(...)</span> method. PackRes method gets the pointer to the reflection and starts iterating over all fields of Background.proto. In each iteration correct xml node attribute name is deduced using <span class="highlight_text">opts.GetExtension(...)</span> call and a handy method from pugi fetches the reference to xml attribute with same extension name. Now all is left to update the proto field value using <span class="highlight_text">refl</span> pointer.<br>You might argue that we still hardcoded attribute names, yes we did but they are much descriptive now as extensions and also we eliminated that complex if-else chain. So that's an improvement!</p>
-        </div>
-        <div class="section group">
-            <div class="col span_3_of_12">
-            </div>
-            <div class="col span_6_of_12">
-                <p style="font-weight: bold;">So, that's all for Week 1 updates, see you in next one. That will extend this reflection knowledge to handle much bigger and complicated .tmx files.</p>
-            </div>
-            <div class="col span_3_of_12">
-            </div>
-        </div>
-        <div class="col span_3_of_12"></div>
-    </div>
+    <div style="background-color: rgb(124, 180, 120); padding-top: 10px; margin-top: 20px;"></div>
 </body>
 </html>
