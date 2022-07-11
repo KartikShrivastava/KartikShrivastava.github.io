@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <title>GSOC 2022 - Kartik Shrivastava</title>
+    <link rel="stylesheet" href="gridsystem.css">
+    <link rel="stylesheet" href="normalizereset.css">
+    <link rel="stylesheet" href="indexstyle.css">
+</head>
+
+<body>
+    <div style="background-color: rgb(124, 180, 120); padding-top: 10px;"></div>
+    <div>
+        <header>
+            <div style="padding-top: 5%;">Google Summer of Code 2022 - The ENIGMA Team</div>
+        </header>
+
+        <nav>
+            <a href="index.html" style="color: rgb(0, 0, 0);">Home</a>
+            <a href="week1.html" style="color: rgb(0, 0, 0);">Week 1</a>
+            <a href="week2-week3.html" style="color: rgb(0, 0, 0);">Week 2-3</a>
+            <a href="week4.html" style="color: rgb(0, 0, 0);"><u>Week 4</u></a>
+        </nav>
+
+        <hr class="solid">
+
+        <!-- <nav> -->
+            <!-- <a href="#" style="color: rgb(0, 0, 0);"><u>Week 1</u></a> -->
+        <!-- </nav> -->
+
+        <!-- <hr class="solid"> -->
+
+        <main>
+            <div class="section group" style="margin-top: 20px;">
+                <div class="col span_2_of_12">
+                </div>
+                <div class="col span_8_of_12">
+                    <h1 style="color: rgb(6, 6, 6); font-size: 50px;">Week 4: Fixing tile transformations and adding compressed data support</h1>
+                </div>
+                <div class="col span_2_of_12">
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="section group">
+        <div class="col span_3_of_12">
+        </div>
+        <div class="col span_6_of_12">
+            <p style="font-size: 20px; line-height: 200%; margin-bottom: 10px;">
+                <span class="color_text">Contributor: </span><a href="https://github.com/KartikShrivastava">Kartik Shrivastava</a>
+                <br>
+                <span class="color_text">Project: </span><a href="https://summerofcode.withgoogle.com/programs/2022/projects/TowRJHuL">Add Tiled compatibility to/from Enigma</a>
+                <br>
+                <span class="color_text">Guided by: </span><a href="https://github.com/bjorn">bjorn</a>, <a href="https://github.com/fundies">fundies</a> and <a href="https://github.com/JoshDreamland">Josh</a>
+                <br>
+            </p>
+            <span class="color_text" style="font-size: 20px; font-family: roboto_slabregular, 'Trebuchet MS';">Highlights: </span>
+            <ol style="font-family: roboto_slabregular, 'Trebuchet MS'; font-size: 20px; line-height: 150%; margin-top: 10px; padding-left: 30px; padding-right: 30px;">
+                <li>Added rotation, alpha(tint), horizontal/vertical flip support and fixed tile scaling <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/82cc729fb810a0d0df14d55996eefa107a6835a4" style="color: rgb(0, 0, 181);">#82cc729</a></li>
+                <li>Modified Room.tiles paint code to support updated transformations <a href="https://github.com/enigma-dev/RadialGM/pull/228/commits/39cee30de896877f6c980f7f4ad050bdaef9e850" style="color: rgb(0, 0, 181);">#39cee30</a></li>
+                <li>Added support to load TMX files with base64 encoded zlib compressed layer data <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/21c2c6b122ecadf0b4b69341cc053007833108c1" style="color: rgb(0, 0, 181);">#21c2c6b</a></li>
+            </ol>
+            <br>
+            <br>
+            <hr class="dashed">
+        </div>
+        <div class="col span_3_of_12" style="margin: 10px;">
+            <h2>A side note</h2>
+            <h3>Let's keep it no visible code log this time</h3>
+            <!-- <ul style="padding-left: 18px; font-size: 18px;">
+                <li>(Personal opinion) How to implement something when you feel you do not know which way to go.</li>
+            </ul> -->
+        </div>
+    </div>
+    <div class="section group" style="padding-bottom: 50px;">
+        <div class="col span_3_of_12"></div>
+        <div class="col span_6_of_12">
+            <h2>Details</h2>
+            <h3 style="margin: 0; padding: 0;">Getting transformations work right</h3>
+            <p>
+                Adding rotation support was the most straightforward one, I just added a rotation option to Room.Tile proto message. There is an attribute with the same name "rotation" already present in TMX Object so rest of the conversion has been taken care by PackRes method of TMX loader.
+            </p>
+            <p>
+                Adding opacity which can also create a tile tint effect, is not as straightforward as rotation. Reason being "opacity" attribute in TMX is stored in "objectgroup" node which applies to all of the child "object" nodes, and as objectgroup does not correspond to Room.tile (object does), we cannot rely on PackRes of TMX loader to load the opacity into Room.tile message. So I had to explicitly fetch set the opacity in LoadObjects method.
+            </p>
+            <p>
+                Tiled tiles support several types of flips and rotations based on the type of map orientation (orthogonal, isometric, staggered, hexagonal). The details of these flips and rotations are stored in globalId of the tile which can be retrieved either by gid attribute of "object" node (in case of objects) or by the binary string obtained after decompressing data from layer data node (in case of zlib compression). Checkout Tiled <a href="https://doc.mapeditor.org/en/stable/reference/global-tile-ids/">"Global Tile Id"</a> documentation for more details. The highest 32-bits of each gid contains the flip flags and the types of flips/rotations it supports are: 
+            </p>
+            <ul style="margin-top: 10px; font-size: 15px; font-family: 'Trebuchet MS'; line-height: 150%; color: rgb(25, 25, 25);">
+                <li>
+                    Bit 32: Horizontal flip flag
+                </li>
+                <li>
+                    Bit 31: Vertical flip flag
+                </li>
+                <li>
+                    Bit 30: Diagonal flip flag (in case of orthogonal and isometric maps), 60 degrees clockwise rotation flag (in case of hexagonal maps)
+                </li>
+                <li>
+                    Bit 29: Ignored (in case of orthogonal and isometric maps), 120 degrees clockwise rotation flag (in case of hexagonal maps)
+                </li>
+            </ul>
+            <p>
+                Scale of the object based tiles of Tiled are represented in terms of their width and height, so there was nothing much to do in the TMX loader code. But to get the identical scaling I updated paint code of tiles present in room editor. Details of which are discussed in next section.
+            </p>
+            
+            <br>
+            <br>
+            
+            <h3 style="margin: 0; padding: 0;">Modifying paint code to actually reflect changes in Room editor</h3>
+            <p>
+                So far we have retrieved all the required information correctly (hopefully) in protocol buffers. But why nothing looks different in Room editor? I'm glad you asked :P
+            </p>
+            <p>
+                Its because paint code does not have suitable implementation to modify tiles according to the added details. So the task is to update the paint code without breaking the look of other importers (like gmx). And indeed there will be a breaking change if not handled correctly.
+            </p>
+            <p>
+                It's the way source tile rect is transformed to destination tile rect before drawing, and this is where we have to plug the changes of Tiled tile's width/height (or scale). The trick to render tiles from both gmx and tmx correctly is to use "use_as_tileset" flag of background. When the flag is set to true, we will set width/height of "src" QRectF as individual tile width/height and when its false we will set it as whole background image width/height. Fix applies to "src" rect, this is important because we want to accurately focus the starting rect so that whatever width/height is saved in Room.tile (width/height of "dest" rect) handles the rest of scaling properly.
+            </p>
+            <p>
+                After fixing source-destination rect scaling. Adding rotation and scale (not same as of rect scale) is the matter of correct-ordered-transformation of tile in world coordinates (Qt painter doesn't seem to work in local coordinates). To set alpha I used "painter.setOpacity()" method.
+            </p>
+            
+            <br>
+            <br>
+            
+            <h3 style="margin: 0; padding: 0;">Loading Tiled tiles from base64 encoded zlib compressed bytes</h3>
+            <p>
+                Adding this support wasn't as intimidating as the title sounds like. Thanks to already available implementation to decode base64 strings and also to uncompress the zlib data stream. Just required some grep commands to find the implementation and refactoring them to the common place.
+            </p>
+            <p>
+                I found base64 helper functions in "SHELL" dir (enigma's engine) which is not accessible from libEGM dir (where importers/exporters live). So my mentor fundies came to the rescue, and suggested to put it in "shared" dir so that it can be used from anywhere (including libEGM). Did that and worked like charm.
+            </p>
+            <p>
+                I found zlib encoder decoders in "gmk.cpp" which is a .gmk file importer, but the implementation was hidden. So that was separated into a brand new "libEGM/General" dir. Did that worked like charm too.
+            </p>
+            <p>
+                Plugged the data string from "layer/data" node of TMX file into base64 decoder and then into zlib decoder. Got a big string back which contains gids of all tiles in 4 bytes chunk. Interpreted that correctly and there is the support to compressed data. (P.S.: TBH wasn't that simple, those single liners in the implementation wasn't came into my mind instantly. So yeah ;) 
+            </p>
+        </div>
+        <div class="section group">
+            <div class="col span_3_of_12">
+            </div>
+            <div class="col span_6_of_12">
+                <p style="font-weight: bold;">So, that's how my 4th GSoC week went, coming week will be more focused on refactoring and figuring out the support to missing functionalities :)</p>
+            </div>
+            <div class="col span_3_of_12">
+            </div>
+        </div>
+        <div class="col span_3_of_12"></div>
+    </div>
+    <div style="background-color: rgb(124, 180, 120); padding-top: 10px; margin-top: 20px;"></div>
+</body>
+</html>
