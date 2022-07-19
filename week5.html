@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <title>GSOC 2022 - Kartik Shrivastava</title>
+    <link rel="stylesheet" href="gridsystem.css">
+    <link rel="stylesheet" href="normalizereset.css">
+    <link rel="stylesheet" href="indexstyle.css">
+</head>
+
+<body>
+    <div style="background-color: rgb(124, 180, 120); padding-top: 10px;"></div>
+    <div>
+        <header>
+            <div style="padding-top: 5%;">Google Summer of Code 2022 - The ENIGMA Team</div>
+        </header>
+
+        <nav>
+            <a href="index.html" style="color: rgb(0, 0, 0);">Home</a>
+            <a href="week1.html" style="color: rgb(0, 0, 0);">Week 1</a>
+            <a href="week2-week3.html" style="color: rgb(0, 0, 0);">Week 2-3</a>
+            <a href="week4.html" style="color: rgb(0, 0, 0);">Week 4</a>
+            <a href="week5.html" style="color: rgb(0, 0, 0);"><u>Week 5</u></a>
+        </nav>
+
+        <hr class="solid">
+
+        <!-- <nav> -->
+            <!-- <a href="#" style="color: rgb(0, 0, 0);"><u>Week 1</u></a> -->
+        <!-- </nav> -->
+
+        <!-- <hr class="solid"> -->
+
+        <main>
+            <div class="section group" style="margin-top: 20px;">
+                <div class="col span_2_of_12">
+                </div>
+                <div class="col span_8_of_12">
+                    <h1 style="color: rgb(6, 6, 6); font-size: 50px;">Week 5: Refactors, bug fixes and Glib, Csv, Zstd layer data support</h1>
+                </div>
+                <div class="col span_2_of_12">
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="section group">
+        <div class="col span_3_of_12">
+        </div>
+        <div class="col span_6_of_12">
+            <p style="font-size: 20px; line-height: 200%; margin-bottom: 10px;">
+                <span class="color_text">Contributor: </span><a href="https://github.com/KartikShrivastava">Kartik Shrivastava</a>
+                <br>
+                <span class="color_text">Project: </span><a href="https://summerofcode.withgoogle.com/programs/2022/projects/TowRJHuL">Add Tiled compatibility to/from Enigma</a>
+                <br>
+                <span class="color_text">Guided by: </span><a href="https://github.com/bjorn">bjorn</a>, <a href="https://github.com/fundies">fundies</a> and <a href="https://github.com/JoshDreamland">Josh</a>
+                <br>
+            </p>
+            <span class="color_text" style="font-size: 20px; font-family: roboto_slabregular, 'Trebuchet MS';">Highlights: </span>
+            <ul style="font-family: roboto_slabregular, 'Trebuchet MS'; font-size: 20px; line-height: 150%; margin-top: 10px; padding-left: 30px; padding-right: 30px;">
+                <li>
+                    Features:
+                    <ol style="font-family: roboto_slabregular, 'Trebuchet MS'; font-size: 20px; line-height: 150%; margin-top: 10px; padding-left: 30px; padding-right: 30px;">
+                        <li>Added support to load tiles from Csv layer data <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/0e04e22acce855d32fae56dc149a2849c437d644" style="color: rgb(0, 0, 181);">#0e04e22</a></li>
+                        <li>Added zstd library support to Enigma - libEGM <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/527009867343232d32bdd9ebfd78e85d66e1da89" style="color: rgb(0, 0, 181);">#5270098</a></li>
+                        <li>Added support to load tiles from zstd and gzip compressed layer data <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/2cf682993af9ca25ae4bf4130ed3ecec2c9b1fef" style="color: rgb(0, 0, 181);">#2cf6829</a></li>
+                    </ol>
+                </li>
+                <li>
+                    Notable bug fixes:
+                    <ol style="font-family: roboto_slabregular, 'Trebuchet MS'; font-size: 20px; line-height: 150%; margin-top: 10px; padding-left: 30px; padding-right: 30px;">
+                        <li>Fixed a nullptr bug in tsx importer <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/b3e08171db0464a899a9ade46990d6b01888b686" style="color: rgb(0, 0, 181);">#b3e0817</a></li>
+                        <li>Fixed signed global id obtained from zlib decompress <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/593fb3d1df7442471e2305330d465ac236263c46" style="color: rgb(0, 0, 181);">#593fb3d</a></li>
+                    </ol>
+                </li>
+                <li>
+                    Notable refactor:
+                    <ol style="font-family: roboto_slabregular, 'Trebuchet MS'; font-size: 20px; line-height: 150%; margin-top: 10px; padding-left: 30px; padding-right: 30px;">
+                        <li>Refactored duplicate code, added shared/libbase64_util to make <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/5614cfbd6d67e668d1170ce7a52f6ffb9f89d2f6" style="color: rgb(0, 0, 181);">#5614cfb</a></li>
+                    </ol>
+                </li>
+            </ul>
+            <br>
+            <br>
+            <hr class="dashed">
+        </div>
+        <div class="col span_3_of_12" style="margin: 10px;">
+            <h2>A side note</h2>
+            <h3>What you can learn from this as a casual reader?</h3>
+            <ul style="padding-left: 18px; font-size: 18px;">
+                <li>How to write a very simple csv loader.</li>
+                <li>How to support/add a new library to Enigma - libEGM.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="section group" style="padding-bottom: 50px;">
+        <div class="col span_3_of_12"></div>
+        <div class="col span_6_of_12">
+            <h2>Details</h2>
+            <h3 style="margin: 0; padding: 0;">Loading Csv layer data using string streams</h3>
+            <p>TMX files supports storing tile data in CSV format too. Each comma separated value contains global id of the tile. There are total layerWidth*layerHeight such values, arranged in layerHeight number of lines each containing layerWidth number of global ids separated by commas.</p>
+            <p>The type of data stored is of type unsigned int, which allows us to make a fairly simple csv loader. At first we will load the csv string from child node of layer - data node into a string. Next we iterate over this data and extract global id data string separated by commas.</p>
+            <p>String containing data is converted into istringstream to be able to iterate line by line. Then each line is converted into stringstream to be able to iterate comma by comma. Finally each sub-string obtained is converted into unsigned int global id. Kindly refer following snippet for more details:</p>
+            <script src="https://gist.github.com/KartikShrivastava/78e41944cce789493f970ff9cf2370f7.js"></script>
+            <br>
+            <br>
+            <h3 style="margin: 0; padding: 0;">Let's add zstd library support to Enigma - libEGM</h3>
+            <p>Zstd or Zstandard is a fast lossless compression algorithm and TMX files can store tiles using zstd compression, that's why we are going to include this library in enigma.</p>
+            <p>We will start by first installing/building the library. I'm using Arch linux and it's package manager pacman has a prebuilt zstd package available. Its installed using <span class="highlight_text">sudo pacman -Sy zstd</span> command.</p>
+            <p>Now we have to update couple of files to finally be able to use zstd in libEGM. Following are notable edits, kindly refer to <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/527009867343232d32bdd9ebfd78e85d66e1da89" style="color: rgb(0, 0, 181);">#5270098</a> commit for complete list of updated files.</p>
+            <p>Makefile changes: <span class="highlight_text">CommandLine/libEGM/Makefile</span>, we will update <span class="highlight_text">CXXFLAGS</span> and <span class="highlight_text">LDFLAGS</span> like following:</p>
+            <script src="https://gist.github.com/KartikShrivastava/39195751a9dcd6c35ed509fedec17436.js"></script>
+            <p>CI changes: Updated pacman installs in "Bootstrap Archlinux" section of <span class="highlight_text">azure-pipelines.yml</span></p>
+            <script src="https://gist.github.com/KartikShrivastava/543ebb5cc165856a567090bba01ea0d0.js"></script>
+            <p>CMakeLists.txt changes: Add zstd library</p>
+            <script src="https://gist.github.com/KartikShrivastava/fc42bdb0402b995dc7e1454aa4d1672c.js"></script>
+            <br>
+            <br>
+            <h3 style="margin: 0; padding: 0;">Loading zstd compressed layer data</h3>
+            <p>As now we have access to zstd library, so decompressing zstd compressed stream is pretty simple. We first decode the base64 layer - data string and pass it to <span class="highlight_text">ZSTD_decompress</span> method of zstd for decompression. Kindly refer to following code snippet for details:</p>
+            <script src="https://gist.github.com/KartikShrivastava/9ffd8b25731d08b0278fdec1d418f00d.js"></script>
+            <br>
+            <br>
+            <h3 style="margin: 0; padding: 0;">Loading gzip compressed layer data</h3>
+            <p>To decompress gzip compressed data, zlib library can be used and to do so only one small change in current zlib decompress method is required.</p>
+            <p>Instead of using <span class="highlight_text">inflateInit</span> we will use <span class="highlight_text">inflateInit2</span> which allows us to pass extra <span class="highlight_text">windowBits</span> and if we pass a special windowBits equal to <span class="highlight_text">32 | MAX_WBITS</span> as its 2nd argument, zlib triggers automatic header detection to properly decompress both zlib abd gzip streams. Refer to following code snip:</p>
+            <script src="https://gist.github.com/KartikShrivastava/0675a81bbb4920bd8ac239b6bbe1f015.js"></script>
+        </div>
+        <div class="section group">
+            <div class="col span_3_of_12">
+            </div>
+            <div class="col span_6_of_12">
+                <p style="font-weight: bold;">So, that's the brief description of feature updates made in Week 5 of this exciting TMX importer. Coming week I'll work mostly on stretch goals like adding hexagonal and isometric map support.</p>
+            </div>
+            <div class="col span_3_of_12">
+            </div>
+        </div>
+        <div class="col span_3_of_12"></div>
+    </div>
+    <div style="background-color: rgb(124, 180, 120); padding-top: 10px; margin-top: 20px;"></div>
+</body>
+</html>
