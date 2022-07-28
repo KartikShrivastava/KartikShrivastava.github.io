@@ -82,23 +82,46 @@
         <div class="col span_6_of_12">
             <h2>Details</h2>
             <h3 style="margin: 0; padding: 0;">Hexagonal map support</h3>
-            <p>There are few things which are very important while dealing with hex or hexagonal maps. Let's take a look into each one of them one by one.</p>
+            <h4>There are few things which are very important while dealing with hex or hexagonal maps. Let's take a look into each one of them one by one.</h4>
             <p>
-                hexSideLength: It tells us how much pixels each side of the hexagonal tile takes.
+                <span class="highlight_text">hexSideLength</span>: It tells us how much pixels each side of the hexagonal tile takes.
                 <br>
-                staggerAxis: It tells us in which direction does two parallel but opposite sides of the hexagon tile lie. It can take value of "x" or "y".
+                <span class="highlight_text">staggerAxis</span>: It tells us in which direction does two parallel but opposite sides of the hexagon tile lie. It can take value of "x" or "y".
                 <br>
-                staggerIndex: Two consecutive staggerAxis rows/columns are arranged with an offset between one-another to make up a hex map. So staggerIndex tells us which index will remain in place and which has to be offsetted. It takes value of "odd" or "even".
+                <span class="highlight_text">staggerIndex</span>: Two consecutive staggerAxis rows/columns are arranged with an offset between one-another to make up a hex map. So staggerIndex tells us which index will remain in place and which has to be offsetted. It takes value of "odd" or "even".
             </p>
             <p>I've created a small struct to store these three properties of hex map together.</p>
             <script src="https://gist.github.com/KartikShrivastava/721d5254fd661cd53691c4077bfae2c4.js"></script>
-            
+            <h4>Width and height of hex maps depends on hexSideLength and staggerAxis. Let's take an example with "x" as staggerAxis.</h4>
+            <p>
+                The effective width of each hex tile in "x" staggered hex map is <span class="highlight_text">(hexSideLength + 1/2*hexSideLength)</span> or <span class="highlight_text">(3/2*hexSideLength)</span>. So total width becomes <span class="highlight_text">(numHorizontalTiles * (3/2 * hexSideLength)) + (1/2 * hexSideLength)</span>. We add <span class="highlight_text">(1/2 * hexSideLength)</span> to the result to fully show the last hex tile in x direction.
+                <br>
+                <br>
+                The height of hex map in "x" staggered hex map is almost same as of orthogonal map, just with extra pixels <span class="highlight_text">(hexSideLength)</span> given for last hex tile in y direction. So height becomes <span class="highlight_text">(numVerticalTiles * tileHeight + hexSideLength)</span>.
+                <br>
+                <br>
+                Below is the snippet for room width/height calculation in case of hex map, for both "x" and "y" staggerAxis.
+            </p>
+            <script src="https://gist.github.com/KartikShrivastava/760f1f0828e6d6066d8a2f998f32e8e0.js"></script>
+            <h4>Another notable changes has to be made in the arrangement of tiles in room, to make it look like a Tiled hexagonal map.</h4>
+            <p>
+                Let's take example of "x" staggered hex map again. The x position of top most corner of the given tile is almost similar to that of orthogonal map, with an exception. As mentioned earlier the effective width of hex tile is different than actual tile(a little smaller in stagger direction), so to compensate that we subtract <span class="highlight_text">(1/2*hexSideLength)</span> from the actual <span class="highlight_text">(tileWidth)</span> to get final top-left corner x value as <span class="highlight_text">(currentColumn * (tileWidth - (1/2*hexSideLength)))</span>. I imagine it as pulling all tiles lying in staggerAxis direction by some offset.
+                <br>
+                <br>
+                Now to decide top-left corner y position of hex tile in "x" staggered hex map, we will make use of staggerIndex. Also let's take a case when staggerIndex is "odd".
+                <br>
+                Whenever we will encounter <span class="highlight_text">(currentRow)</span> index multiple of 2 we will set y position as <span class="highlight_text">(currentRow*tileHeight)</span>(which is equal to that of orthogonal tile), otherwise we will set y position as <span class="highlight_text">(currentRow*tileHeight + hexSideLength)</span>.
+                <br>
+                <br>
+                Below is the snippet for tile x/y top-left corner position calculation in case of hex map, for both "x" and "y" staggerAxis as well as both "even" and "odd" staggerIndex.
+            </p>
+            <script src="https://gist.github.com/KartikShrivastava/0738b115fd16673ab24e544a3c320491.js"></script>
         </div>
         <div class="section group">
             <div class="col span_3_of_12">
             </div>
             <div class="col span_6_of_12">
-                <p style="font-weight: bold;">WIP.</p>
+                <p style="font-weight: bold;">That's a glimpse of how a hexagonal map can be parsed. Coming week I'll be working on isometric map support, thanks for following along!</p>
             </div>
             <div class="col span_3_of_12">
             </div>
