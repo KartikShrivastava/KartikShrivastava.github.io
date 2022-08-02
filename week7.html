@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <title>GSOC 2022 - Kartik Shrivastava</title>
+    <link rel="stylesheet" href="gridsystem.css">
+    <link rel="stylesheet" href="normalizereset.css">
+    <link rel="stylesheet" href="indexstyle.css">
+</head>
+
+<body>
+    <div style="background-color: rgb(124, 180, 120); padding-top: 10px;"></div>
+    <div>
+        <header>
+            <div style="padding-top: 5%;">Google Summer of Code 2022 - The ENIGMA Team</div>
+        </header>
+
+        <nav>
+            <a href="index.html" style="color: rgb(0, 0, 0);">Home</a>
+            <a href="week1.html" style="color: rgb(0, 0, 0);">Week 1</a>
+            <a href="week2-week3.html" style="color: rgb(0, 0, 0);">Week 2-3</a>
+            <a href="week4.html" style="color: rgb(0, 0, 0);">Week 4</a>
+            <a href="week5.html" style="color: rgb(0, 0, 0);">Week 5</a>
+            <a href="week6.html" style="color: rgb(0, 0, 0);">Week 6</a>
+            <a href="week7.html" style="color: rgb(0, 0, 0);"><u>Week 7</u></a>
+        </nav>
+
+        <hr class="solid">
+
+        <!-- <nav> -->
+            <!-- <a href="#" style="color: rgb(0, 0, 0);"><u>Week 1</u></a> -->
+        <!-- </nav> -->
+
+        <!-- <hr class="solid"> -->
+
+        <main>
+            <div class="section group" style="margin-top: 20px;">
+                <div class="col span_2_of_12">
+                </div>
+                <div class="col span_8_of_12">
+                    <h1 style="color: rgb(6, 6, 6); font-size: 50px;">Week 7: Documentation and isometric map support</h1>
+                </div>
+                <div class="col span_2_of_12">
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="section group">
+        <div class="col span_3_of_12">
+        </div>
+        <div class="col span_6_of_12">
+            <p style="font-size: 20px; line-height: 200%; margin-bottom: 10px;">
+                <span class="color_text">Contributor: </span><a href="https://github.com/KartikShrivastava">Kartik Shrivastava</a>
+                <br>
+                <span class="color_text">Project: </span><a href="https://summerofcode.withgoogle.com/programs/2022/projects/TowRJHuL">Add Tiled compatibility to/from Enigma</a>
+                <br>
+                <span class="color_text">Guided by: </span><a href="https://github.com/bjorn">bjorn</a>, <a href="https://github.com/fundies">fundies</a> and <a href="https://github.com/JoshDreamland">Josh</a>
+                <br>
+            </p>
+            <span class="color_text" style="font-size: 20px; font-family: roboto_slabregular, 'Trebuchet MS';">Highlights: </span>
+            <ol style="font-family: roboto_slabregular, 'Trebuchet MS'; font-size: 20px; line-height: 150%; margin-top: 10px; padding-left: 30px; padding-right: 30px;">
+                <li>Added documentation to tsx and tmx header files <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/3d5899fbe7d7591772ab3fbc73eb42fe18d8964b" style="color: rgb(0, 0, 181);">#3d5899f</a> <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/3d5899fbe7d7591772ab3fbc73eb42fe18d8964b" style="color: rgb(0, 0, 181);">#3d5899f</a></li>
+                <li>Added support to isometric maps <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/c50fff095b7e630e9d54a8aaf34c9e0b32563f49" style="color: rgb(0, 0, 181);">#c50fff0</a></li>
+                <li>Added support to staggered isometric maps <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/2c6040eafa4f8c4bebe5dc0b373f0c48473a1056" style="color: rgb(0, 0, 181);">#2c6040e</a></li>
+            </ol>
+            <br>
+            <br>
+            <hr class="dashed">
+        </div>
+    </div>
+    <div class="section group" style="padding-bottom: 50px;">
+        <div class="col span_3_of_12"></div>
+        <div class="col span_6_of_12">
+            <h2>Details</h2>
+            <h3 style="margin: 0; padding: 0;">Isometric map support</h3>
+            <p>Setting Room width and height of an isometric map remains the same as of orthogonal maps i.e. <span class="highlight_text">numHorizontalTiles * tileWidth</span> and <span class="highlight_text">numVerticalTiles * tileHeight</span> respectively.</p>
+            <p>Just little work as to be done to arrange isometric tiles in the Room.</p>
+            <p>To get the x coordinate of top-left corner of the tile, I first get the position of the first tile of the corresponding row which I called <span class="highlight_text">xStart</span>, and then add <span class="highlight_text">currentRow * tileWidth / 2</span> to it. Calculation of <span class="highlight_text">xStart</span> is quite interesting because it takes into account the currentColumn of the map/room, check the comments in the below code snippet to get a sense of how it is computed. Finally, to get y coordinate of top-left corner of the tile we take into account both currentColumn and currentRow, we multiple both by <span class="highlight_text">tileHeight / 2</span> and add the result.</p>
+            <script src="https://gist.github.com/KartikShrivastava/5c2b9893b1bd5777b28b60b2bf0073e9.js"></script>
+
+            <h3 style="padding-top: 20px;">Staggered isometric map support</h3>
+            <p>Like hexagonal maps, isometric maps also have staggerness. So at first I separated out staggerAxis and staggerIndex into its own struct like below.</p>
+            <script src="https://gist.github.com/KartikShrivastava/66dffee3361e7075417a439d5a6ab7b9.js"></script>
+            <p>Room width and height computation of staggered maps requires slight attention. Due to staggerness in horizontal and vertical directions, width and height of the Room has to be adjusted accordingly. So if the given map is "x" staggered, then we set Room width as <span class="highlight_text">numHorizontalTiles * tileWidth / 2</span>, and in case of "y" staggered maps, we set Room height as <span class="highlight_text">numVerticalTiles * tileHeight / 2</span>. Height and width of Room in above cases remains same as of orthogonal maps, check out the snippet below for exact details.</p>
+            <script src="https://gist.github.com/KartikShrivastava/d0ea770401d359fe7bdfe67ead401c68.js"></script>
+            <p>Now because of stagerness in the map we need to compute tile arrangement differently as well.</p>
+            <script src="https://gist.github.com/KartikShrivastava/a5ff3dfa8ba4f56236cae6a8cec73f21.js"></script>
+        </div>
+        <div class="section group">
+            <div class="col span_3_of_12">
+            </div>
+            <div class="col span_6_of_12">
+                <p style="font-weight: bold;">These two addition wraps ups the support to all map format present in Tiled right now, so in coming weeks my goal will be to slowly and gradually move to start integrating EGM importer in Tiled. Thanks for reading!</p>
+            </div>
+            <div class="col span_3_of_12">
+            </div>
+        </div>
+        <div class="col span_3_of_12"></div>
+    </div>
+    <div style="background-color: rgb(124, 180, 120); padding-top: 10px; margin-top: 20px;"></div>
+</body>
+</html>
