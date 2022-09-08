@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <title>GSOC 2022 - Kartik Shrivastava</title>
+    <link rel="stylesheet" href="gridsystem.css">
+    <link rel="stylesheet" href="normalizereset.css">
+    <link rel="stylesheet" href="indexstyle.css">
+</head>
+
+<body>
+    <div style="background-color: rgb(124, 180, 120); padding-top: 10px;"></div>
+    <div>
+        <header>
+            <div style="padding-top: 5%;">Google Summer of Code 2022 - The ENIGMA Team</div>
+        </header>
+
+        <nav>
+            <a href="index.html" style="color: rgb(0, 0, 0);">Home</a>
+            <a href="week1.html" style="color: rgb(0, 0, 0);">Week 1</a>
+            <a href="week2-week3.html" style="color: rgb(0, 0, 0);">Week 2-3</a>
+            <a href="week4.html" style="color: rgb(0, 0, 0);">Week 4</a>
+            <a href="week5.html" style="color: rgb(0, 0, 0);">Week 5</a>
+            <a href="week6.html" style="color: rgb(0, 0, 0);">Week 6</a>
+            <a href="week7.html" style="color: rgb(0, 0, 0);">Week 7</a>
+            <br>
+            <br>
+            <a href="week8-week9.html" style="color: rgb(0, 0, 0);">Week 8-9</a>
+            <a href="week10-week12.html" style="color: rgb(0, 0, 0);"><u>Week 10-12</u></a>
+        </nav>
+
+        <hr class="solid">
+
+        <!-- <nav> -->
+            <!-- <a href="#" style="color: rgb(0, 0, 0);"><u>Week 1</u></a> -->
+        <!-- </nav> -->
+
+        <!-- <hr class="solid"> -->
+
+        <main>
+            <div class="section group" style="margin-top: 20px;">
+                <div class="col span_2_of_12">
+                </div>
+                <div class="col span_8_of_12">
+                    <h1 style="color: rgb(6, 6, 6); font-size: 50px;">Week 10-12: EGM Importer, Testing and Wrap Up</h1>
+                </div>
+                <div class="col span_2_of_12">
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="section group">
+        <div class="col span_3_of_12">
+        </div>
+        <div class="col span_6_of_12">
+            <p style="font-size: 20px; line-height: 200%; margin-bottom: 10px;">
+                <span class="color_text">Contributor: </span><a href="https://github.com/KartikShrivastava">Kartik Shrivastava</a>
+                <br>
+                <span class="color_text">Project: </span><a href="https://summerofcode.withgoogle.com/programs/2022/projects/TowRJHuL">Add Tiled compatibility to/from Enigma</a>
+                <br>
+                <span class="color_text">Guided by: </span><a href="https://github.com/fundies">fundies</a>, <a href="https://github.com/bjorn">bjorn</a> and <a href="https://github.com/JoshDreamland">Josh</a>
+                <br>
+            </p>
+            <span class="color_text" style="font-size: 20px; font-family: roboto_slabregular, 'Trebuchet MS';">Highlights: </span>
+            <ol style="font-family: roboto_slabregular, 'Trebuchet MS'; font-size: 20px; line-height: 150%; margin-top: 10px; padding-left: 30px; padding-right: 30px;">
+                <li>Adding proto fields corresponding to Tiled object layer, tile layer and internal/external tileset <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/1769b4eed64aa799547d9ca35c8ea29f04d3f6f4" style="color: rgb(0, 0, 181);">#1769b4e</a> <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/a2866a1adf9a42f6ae57dca1db548831c3c844eb" style="color: rgb(0, 0, 181);">#a2866a1</a> <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/068660c7a379c6a298d33555bfcc4a948df06c1f" style="color: rgb(0, 0, 181);">#068660c</a> <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/661784da2518c343da1eb44714f8e582cf76f842" style="color: rgb(0, 0, 181);">#661784d</a></li>
+                <li>Creating a new plugin in Tiled to import .egm files <a href="https://github.com/mapeditor/tiled/pull/3435/commits/2428c4f3780544a3fa8742d01a5364d4df44d156" style="color: rgb(0, 0, 181);">#2428c4f</a> <a href="https://github.com/mapeditor/tiled/pull/3435/commits/16122241fb7737369d1703d4a6b826c8717e80ad" style="color: rgb(0, 0, 181);">#1612224</a> <a href="https://github.com/mapeditor/tiled/pull/3435/commits/d1187934bc9c5d929f92b054431281f5f5f04e28" style="color: rgb(0, 0, 181);">#d118793</a> <a href="https://github.com/mapeditor/tiled/pull/3435/commits/d4fa9d066e665dccbeedbb59d7e23b1bf5c1bd7c" style="color: rgb(0, 0, 181);">#d4fa9d0</a></li>
+                <li>Adding merge tmx project into egm functionality in enigma and RadialGM <a href="https://github.com/enigma-dev/RadialGM/pull/228/commits/894aae3b11682dc2509e5496bf7f360a5f6e89a2" style="color: rgb(0, 0, 181);">#894aae3</a> <a href="https://github.com/enigma-dev/RadialGM/pull/228/commits/b7b8cf2ee1380d43fcd18e2c57365333bc8dcd97" style="color: rgb(0, 0, 181);">#b7b8cf2</a> <a href="https://github.com/enigma-dev/RadialGM/pull/228/commits/1f329d7d3af31546104b238e7afeb42d8d0c8bc6" style="color: rgb(0, 0, 181);">#1f329d7</a></li>
+                <li>Adding a gtest <a href="https://github.com/enigma-dev/enigma-dev/pull/2302/commits/d7f0d5004fceb01fe3f9fda675ac630ed79df1ad" style="color: rgb(0, 0, 181);">#d7f0d50</a></li>
+            </ol>
+            <br>
+            <br>
+            <hr class="dashed">
+        </div>
+    </div>
+    <div class="section group" style="padding-bottom: 50px;">
+        <div class="col span_3_of_12"></div>
+        <div class="col span_6_of_12">
+            <h2>Details</h2>
+            <h3 style="margin: 0; padding: 0;">Adding proto fields corresponding to Tiled object layer</h3>
+            <p>
+                This is the first part of the roadblock resolution mentioned in the last log. In above linked PRs, firstly I renamed Room.proto to GMRoom.proto and created an additional EGMRoom.proto. While EGMRoom.proto contains the additional fields to store Tiled object layer, tile layer and tilesets, the GMRoom.proto is kept for backward compatibility (edit from the future: later I realized that I was supposed to use it for GameMaker to EGM format translation routines, and because of some misunderstanding I had regarding usage of newly created EGMRoom.proto I used it to serve both GameMaker as well as Tiled formats).</p>
+            <p>
+                Secondly, I updated tmx.cpp to parse Tiled tmx and tsx files data into newly added Tileset, ObjectGroup and TileLayer messages instead of previous type of parsing, which one of my mentor rightly called "shoe horn" approach, in which I some how managed to fit in the Tiled data into existing GameMaker based Room.proto.</p>
+            <p>
+                At last I updated RoomView class to display the data from newly added EGMRoom.proto fields. The implementation was mostly based on the existing ProtoRepeatableMessage implementation which isn't optimized for optimal rendering.</p>
+            <br>
+
+            <h3 style="margin: 0; padding: 0;">Creating a new plugin in Tiled - "Enigma" plugin</h3>
+            <p>
+                Tiled supports importer and exporter functionality through its plugin interface. This plugin implementation can be mostly divided into two parts. First is to import and link libEGM libraries and second is to parse protocol buffer data into Tiled map.</p>
+            <p>
+                I used Qt .qbs module to import the existing libEGM libraries into this plugin, which proved to be quite helpful in parsing EGM files into known proto buffers.</p>
+            <p>
+                To parse proto data into Tiled map I referred mapreader class. Mainly I sort of wrote a version of mapreader.cpp which is an xml based reader into a protocol buffer based reader.</p>
+            <br>
+
+            <h3 style="margin: 0; padding: 0;">Adding merge TMX project into EGM project functionality</h3>
+            <p>
+                To me this seems like the most important feature of this whole GSoC project, because it actually gives user ability to simultaneously work in the same project between enigma's RadialGM and Tiled editors. This feature is added as a "Merge" button in "File" menu.</p>
+            <p>
+                Here is short sequence of steps a user might follow to use this feature. Let's suppose user is working in a Tiled project saved as TMX file and now wants to create a game out of it in RadialGM(RGM), so user can go ahead and import that TMX file into RGM. Now after a while, user decides to update something in the room so at first this project is saved as EGM file and then can be imported back in Tiled editor using enigma plugin. Now after making the update user saves the project as TMX file, after that "merge" button can be used to copy the updates into existing EGM project in RGM.</p>
+        </div>
+        <div class="section group">
+            <div class="col span_3_of_12">
+            </div>
+            <div class="col span_6_of_12">
+                <p style="font-weight: bold;">So this wraps up my GSoC project and this series of logs. If anyone was following it by any chance, huge thank you to you. Have a nice year ahead!</p>
+            </div>
+            <div class="col span_3_of_12">
+            </div>
+        </div>
+        <div class="col span_3_of_12"></div>
+    </div>
+    <div style="background-color: rgb(124, 180, 120); padding-top: 10px; margin-top: 20px;"></div>
+</body>
+</html>
